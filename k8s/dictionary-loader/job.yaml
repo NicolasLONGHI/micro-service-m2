@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dictionary-loader
+  namespace: motus
+spec:
+  backoffLimit: 5
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-game-service
+          image: busybox:1.36
+          command: ["sh", "-c", "until nc -z game-service 8081; do echo waiting for game-service; sleep 3; done"]
+      containers:
+        - name: dictionary-loader
+          image: motus-dictionary-loader:latest
+          imagePullPolicy: Never
+          env:
+            - name: PGHOST
+              value: game-db
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_USER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATABASE
+              value: motus_game
+            - name: MIN_WORD_LENGTH
+              value: "6"
+            - name: MAX_WORD_LENGTH
+              value: "10"

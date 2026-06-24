@@ -1,0 +1,169 @@
+services:
+  player-db:
+    image: postgres:16-alpine
+    container_name: player-db
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: motus_player
+      POSTGRES_USER: motus
+      POSTGRES_PASSWORD: motus
+    volumes:
+      - player-db-data:/var/lib/postgresql/data
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U motus -d motus_player"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  player-service:
+    build:
+      context: ./backend/player-service
+      dockerfile: Dockerfile
+    container_name: player-service
+    ports:
+      - "8082:8082"
+    networks:
+      - motus-network
+    environment:
+      - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://player-db:5432/motus_player
+      - SPRING_DATASOURCE_USERNAME=motus
+      - SPRING_DATASOURCE_PASSWORD=motus
+    depends_on:
+      player-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  game-db:
+    image: postgres:16-alpine
+    container_name: game-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: motus_game
+      POSTGRES_USER: motus
+      POSTGRES_PASSWORD: motus
+    volumes:
+      - game-db-data:/var/lib/postgresql/data
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U motus -d motus_game"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  game-service:
+    build:
+      context: ./backend/game-service
+      dockerfile: Dockerfile
+    container_name: game-service
+    ports:
+      - "8081:8081"
+    networks:
+      - motus-network
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://game-db:5432/motus_game
+      - SPRING_DATASOURCE_USERNAME=motus
+      - SPRING_DATASOURCE_PASSWORD=motus
+    depends_on:
+      game-db:
+        condition: service_healthy
+      player-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 8
+      start_period: 45s
+
+  dictionary-loader:
+    image: postgres:16-alpine
+    container_name: dictionary-loader
+    depends_on:
+      game-service:
+        condition: service_healthy
+    volumes:
+      - ./backend/game-service/dictionary:/dictionary:ro
+      - ./scripts/load-dictionary.sh:/load-dictionary.sh:ro
+      - ./scripts/filter-motus-dictionary.awk:/filter-motus-dictionary.awk:ro
+    environment:
+      PGHOST: game-db
+      PGUSER: motus
+      PGPASSWORD: motus
+      PGDATABASE: motus_game
+      MIN_WORD_LENGTH: "6"
+      MAX_WORD_LENGTH: "10"
+    entrypoint: ["/bin/sh", "/load-dictionary.sh"]
+    networks:
+      - motus-network
+    restart: "no"
+
+  score-db:
+    image: postgres:16-alpine
+    container_name: score-db
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: motus_score
+      POSTGRES_USER: motus
+      POSTGRES_PASSWORD: motus
+    volumes:
+      - score-db-data:/var/lib/postgresql/data
+    networks:
+      - motus-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U motus -d motus_score"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  score-service:
+    build:
+      context: ./backend/score-service
+      dockerfile: Dockerfile
+    container_name: score-service
+    ports:
+      - "8083:8083"
+    networks:
+      - motus-network
+    environment:
+      - SERVER_PORT=8083
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://score-db:5432/motus_score
+      - SPRING_DATASOURCE_USERNAME=motus
+      - SPRING_DATASOURCE_PASSWORD=motus
+    depends_on:
+      player-db:
+        condition: service_healthy
+      score-db:
+        condition: service_healthy
+      player-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  motus-network:
+    driver: bridge
+
+volumes:
+  game-db-data:
+  player-db-data:
+  score-db-data:

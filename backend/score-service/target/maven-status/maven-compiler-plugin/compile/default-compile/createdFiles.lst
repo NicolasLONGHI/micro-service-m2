@@ -1,0 +1,12 @@
+dauphine/projetmicroservices/scoreservice/dto/PlayerStatsResponse.class
+dauphine/projetmicroservices/scoreservice/dto/GameResultRequest.class
+dauphine/projetmicroservices/scoreservice/dto/PlayerStatsResponse$PlayerStatsResponseBuilder.class
+dauphine/projetmicroservices/scoreservice/repository/GameResultRepository.class
+dauphine/projetmicroservices/scoreservice/model/GameResult$GameResultBuilder.class
+dauphine/projetmicroservices/scoreservice/service/ScoreService.class
+dauphine/projetmicroservices/scoreservice/dto/LeaderboardEntry.class
+dauphine/projetmicroservices/scoreservice/dto/GameResultRequest$GameResultRequestBuilder.class
+dauphine/projetmicroservices/scoreservice/controller/ScoreController.class
+dauphine/projetmicroservices/scoreservice/model/GameResult.class
+dauphine/projetmicroservices/scoreservice/dto/LeaderboardEntry$LeaderboardEntryBuilder.class
+dauphine/projetmicroservices/scoreservice/ScoreServiceApplication.class

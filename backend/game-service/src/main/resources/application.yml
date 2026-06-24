@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/motus_game}
+    username: ${SPRING_DATASOURCE_USERNAME:motus}
+    password: ${SPRING_DATASOURCE_PASSWORD:motus}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8081
+
+motus:
+  admin:
+    password: "0000"

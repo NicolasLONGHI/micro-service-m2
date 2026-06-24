@@ -1,0 +1,8 @@
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/ScoreServiceApplication.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/controller/ScoreController.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/dto/GameResultRequest.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/dto/LeaderboardEntry.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/dto/PlayerStatsResponse.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/model/GameResult.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/repository/GameResultRepository.java
+/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/score-service/src/main/java/dauphine/projetmicroservices/scoreservice/service/ScoreService.java

@@ -1,0 +1,9 @@
+dauphine/projetmicroservices/playerservice/model/Player$PlayerBuilder.class
+dauphine/projetmicroservices/playerservice/dto/PlayerResponse$PlayerResponseBuilder.class
+dauphine/projetmicroservices/playerservice/dto/PlayerRegistrationRequest.class
+dauphine/projetmicroservices/playerservice/repository/PlayerRepository.class
+dauphine/projetmicroservices/playerservice/controller/PlayerController.class
+dauphine/projetmicroservices/playerservice/model/Player.class
+dauphine/projetmicroservices/playerservice/service/PlayerService.class
+dauphine/projetmicroservices/playerservice/PlayerServiceApplication.class
+dauphine/projetmicroservices/playerservice/dto/PlayerResponse.class

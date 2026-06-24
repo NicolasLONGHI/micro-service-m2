@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: score-db-pvc
+  namespace: motus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: score-db
+  namespace: motus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: score-db
+  template:
+    metadata:
+      labels:
+        app: score-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: motus_score
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "motus", "-d", "motus_score"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: score-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: score-db
+  namespace: motus
+spec:
+  selector:
+    app: score-db
+  ports:
+    - port: 5432
+      targetPort: 5432

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motus - Jeu de Devinette</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 MOTUS</h1>
+            <p class="subtitle">Devinez le mot en un minimum d'essais</p>
+        </header>
+
+        <!-- Section Authentification -->
+        <section id="authSection" class="section auth-section">
+            <div class="auth-header">
+                <h2 id="authPanelTitle">Connexion</h2>
+                <button id="adminAccessBtn" class="btn btn-icon-only" title="Accès administrateur" aria-label="Accès administrateur">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"></path>
+                        <circle cx="12" cy="11" r="2.5"></circle>
+                        <path d="M9.5 14.5c.8 1.2 2.2 2 3.5 2s2.7-.8 3.5-2"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="loginPanel" class="auth-panel">
+                <div class="form-group">
+                    <label for="loginUsernameInput">Pseudo</label>
+                    <input type="text" id="loginUsernameInput" class="input-field" placeholder="Votre pseudo" autocomplete="username">
+                    <label for="loginPasswordInput">Mot de passe</label>
+                    <input type="password" id="loginPasswordInput" class="input-field" placeholder="Votre mot de passe" autocomplete="current-password">
+                    <button id="loginBtn" class="btn btn-primary">Se connecter</button>
+                </div>
+                <p class="auth-switch">
+                    <button id="showRegisterBtn" class="auth-switch-link" type="button">Créer un compte</button>
+                </p>
+                <div id="authError" class="error-message"></div>
+            </div>
+
+            <div id="registerPanel" class="auth-panel hidden">
+                <div class="form-group">
+                    <label for="registerUsernameInput">Pseudo</label>
+                    <input type="text" id="registerUsernameInput" class="input-field" placeholder="Choisissez un pseudo unique" autocomplete="username">
+                    <label for="registerEmailInput">Adresse e-mail</label>
+                    <input type="email" id="registerEmailInput" class="input-field" placeholder="votre.email@exemple.com" autocomplete="email">
+                    <label for="registerPasswordInput">Mot de passe</label>
+                    <input type="password" id="registerPasswordInput" class="input-field" placeholder="Votre mot de passe" autocomplete="new-password">
+                    <label for="registerPasswordConfirmInput">Confirmer le mot de passe</label>
+                    <input type="password" id="registerPasswordConfirmInput" class="input-field" placeholder="Retapez le mot de passe" autocomplete="new-password">
+                    <p class="password-hint">8 caractères minimum, avec majuscule, minuscule et chiffre</p>
+                    <button id="registerBtn" class="btn btn-primary">Créer le compte</button>
+                </div>
+                <p class="auth-switch">
+                    <button id="showLoginBtn" class="auth-switch-link" type="button">Déjà un compte ? Se connecter</button>
+                </p>
+                <div id="registerError" class="error-message"></div>
+                <div id="registerSuccess" class="game-message hidden"></div>
+            </div>
+        </section>
+
+        <!-- Modal connexion admin -->
+        <div id="adminLoginModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🔐 Administration</h2>
+                <p class="modal-subtitle">Entrez le mot de passe administrateur</p>
+                <input type="password" id="adminPasswordInput" class="input-field" placeholder="Mot de passe">
+                <div id="adminLoginError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="adminLoginBtn" class="btn btn-primary">Connexion</button>
+                    <button id="adminLoginCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Admin -->
+        <section id="adminSection" class="section admin-section hidden">
+            <div class="admin-header">
+                <h2>🛡️ Administration</h2>
+                <button id="adminLogoutBtn" class="btn btn-secondary btn-with-icon">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Quitter l'admin</span>
+                </button>
+            </div>
+
+            <div class="admin-tabs">
+                <button id="adminTabResults" class="admin-tab active" type="button">Résultats</button>
+                <button id="adminTabWords" class="admin-tab" type="button">Dictionnaire</button>
+                <button id="adminTabUsers" class="admin-tab" type="button">Comptes</button>
+            </div>
+
+            <div id="adminResultsPanel">
+            <div class="admin-search-panel">
+                <div class="admin-search-header">
+                    <h3>Recherche</h3>
+                    <button id="adminAdvancedSearchToggle" class="admin-advanced-toggle" type="button" aria-expanded="false" aria-controls="adminAdvancedSearch">
+                        <span>Recherche avancée</span>
+                        <svg class="admin-advanced-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="admin-search-themes">
+                    <div class="admin-search-theme">
+                        <div class="admin-search-row">
+                            <div class="search-field">
+                                <label for="searchUsername">Pseudo (contient)</label>
+                                <input type="text" id="searchUsername" class="input-field" placeholder="Ex : nico">
+                            </div>
+                            <div class="search-field">
+                                <label for="searchIsWinner">Résultat de la partie</label>
+                                <select id="searchIsWinner" class="input-field">
+                                    <option value="">Tous les résultats</option>
+                                    <option value="true">Victoires uniquement</option>
+                                    <option value="false">Défaites uniquement</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="adminAdvancedSearch" class="admin-advanced-search hidden">
+                        <div class="admin-search-theme">
+                            <h4>Date de la partie</h4>
+                            <div class="admin-search-row">
+                                <div class="search-field">
+                                    <label for="searchStartDate">Date de début (inclus)</label>
+                                    <input type="date" id="searchStartDate" class="input-field">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchEndDate">Date de fin (inclus)</label>
+                                    <input type="date" id="searchEndDate" class="input-field">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-search-theme">
+                            <h4>Statistiques du joueur</h4>
+                            <div class="admin-search-row">
+                                <div class="search-field">
+                                    <label for="searchMinWinRate">Taux de victoire min (%)</label>
+                                    <input type="number" id="searchMinWinRate" class="input-field" min="0" max="100" step="0.1">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchMaxWinRate">Taux de victoire max (%)</label>
+                                    <input type="number" id="searchMaxWinRate" class="input-field" min="0" max="100" step="0.1">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchMinAvgAttempts">Moyenne d'essais min</label>
+                                    <input type="number" id="searchMinAvgAttempts" class="input-field" min="0" step="1">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchMaxAvgAttempts">Moyenne d'essais max</label>
+                                    <input type="number" id="searchMaxAvgAttempts" class="input-field" min="0" step="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-search-theme">
+                            <h4>Position au classement</h4>
+                            <div class="admin-search-row">
+                                <div class="search-field">
+                                    <label for="searchLeaderboardPosition">Position exacte</label>
+                                    <input type="number" id="searchLeaderboardPosition" class="input-field" min="1" step="1">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchMinPosition">Position minimale</label>
+                                    <input type="number" id="searchMinPosition" class="input-field" min="1" step="1">
+                                </div>
+                                <div class="search-field">
+                                    <label for="searchMaxPosition">Position maximale</label>
+                                    <input type="number" id="searchMaxPosition" class="input-field" min="1" step="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-search-actions">
+                    <button id="adminSearchBtn" class="btn btn-primary">Rechercher</button>
+                    <button id="adminResetSearchBtn" class="btn btn-secondary">Réinitialiser</button>
+                </div>
+            </div>
+
+            <div id="adminMessage" class="game-message hidden"></div>
+
+            <div class="admin-table-wrapper">
+                <table class="leaderboard-table admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Partie</th>
+                            <th>Pseudo</th>
+                            <th>Position</th>
+                            <th>Taux</th>
+                            <th>Moy. essais</th>
+                            <th>Mot</th>
+                            <th>Essais</th>
+                            <th>Résultat</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminResultsBody"></tbody>
+                </table>
+            </div>
+            </div>
+
+            <div id="adminWordsPanel" class="hidden">
+                <div class="admin-search-panel">
+                    <h3>Gestion du dictionnaire</h3>
+                    <p id="wordsTotalInfo" class="modal-subtitle">Chargement...</p>
+
+                    <div class="admin-search-theme">
+                        <h4>Recherche de mots</h4>
+                        <div class="admin-search-row">
+                            <div class="search-field">
+                                <label for="wordSearchInput">Mot (contient)</label>
+                                <input type="text" id="wordSearchInput" class="input-field" placeholder="Ex : MAIS">
+                            </div>
+                            <div class="search-field">
+                                <label for="wordDifficultyFilter">Difficulté</label>
+                                <select id="wordDifficultyFilter" class="input-field">
+                                    <option value="">Toutes</option>
+                                    <option value="EASY">Facile</option>
+                                    <option value="MEDIUM">Moyen</option>
+                                    <option value="HARD">Difficile</option>
+                                </select>
+                            </div>
+                            <div class="search-field">
+                                <label for="wordMinLength">Longueur min</label>
+                                <input type="number" id="wordMinLength" class="input-field" min="4" max="15" step="1">
+                            </div>
+                            <div class="search-field">
+                                <label for="wordMaxLength">Longueur max</label>
+                                <input type="number" id="wordMaxLength" class="input-field" min="4" max="15" step="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-search-actions">
+                        <button id="wordSearchBtn" class="btn btn-primary">Rechercher</button>
+                        <button id="wordResetSearchBtn" class="btn btn-secondary">Réinitialiser</button>
+                        <button id="wordAddBtn" class="btn btn-primary">+ Ajouter un mot</button>
+                    </div>
+                </div>
+
+                <div id="adminWordsMessage" class="game-message hidden"></div>
+
+                <div class="admin-table-wrapper">
+                    <table class="leaderboard-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mot</th>
+                                <th>Langue</th>
+                                <th>Difficulté</th>
+                                <th>Longueur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminWordsBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="admin-pagination">
+                    <button id="wordsPrevPageBtn" class="btn btn-secondary">Précédent</button>
+                    <div class="admin-page-selector">
+                        <label for="wordsPageInput">Page</label>
+                        <input type="number" id="wordsPageInput" class="input-field admin-page-input" min="1" value="1" aria-label="Numéro de page">
+                        <span id="wordsPageInfo">/ 1</span>
+                    </div>
+                    <button id="wordsNextPageBtn" class="btn btn-secondary">Suivant</button>
+                </div>
+            </div>
+
+            <div id="adminUsersPanel" class="hidden">
+                <div class="admin-search-panel">
+                    <h3>Gestion des comptes</h3>
+                    <p id="usersTotalInfo" class="modal-subtitle">Chargement...</p>
+
+                    <div class="admin-search-theme">
+                        <div class="admin-search-row">
+                            <div class="search-field">
+                                <label for="userSearchInput">Pseudo (contient)</label>
+                                <input type="text" id="userSearchInput" class="input-field" placeholder="Ex : nico">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-search-actions">
+                        <button id="userSearchBtn" class="btn btn-primary">Rechercher</button>
+                        <button id="userResetSearchBtn" class="btn btn-secondary">Réinitialiser</button>
+                        <button id="userAddBtn" class="btn btn-primary">+ Créer un compte</button>
+                    </div>
+                </div>
+
+                <div id="adminUsersMessage" class="game-message hidden"></div>
+
+                <div class="admin-table-wrapper">
+                    <table class="leaderboard-table admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Pseudo</th>
+                                <th>Email</th>
+                                <th>Inscription</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminUsersBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="admin-pagination">
+                    <button id="usersPrevPageBtn" class="btn btn-secondary">Précédent</button>
+                    <div class="admin-page-selector">
+                        <label for="usersPageInput">Page</label>
+                        <input type="number" id="usersPageInput" class="input-field admin-page-input" min="1" value="1" aria-label="Numéro de page">
+                        <span id="usersPageInfo">/ 1</span>
+                    </div>
+                    <button id="usersNextPageBtn" class="btn btn-secondary">Suivant</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal édition résultat admin -->
+        <div id="adminEditModal" class="modal hidden">
+            <div class="modal-content modal-content-wide">
+                <h2>Modifier le résultat</h2>
+                <input type="hidden" id="editResultId">
+                <div class="admin-edit-grid">
+                    <label class="field-readonly">
+                        ID Partie
+                        <input type="text" id="editGameId" class="input-field input-readonly" readonly tabindex="-1">
+                    </label>
+                    <label>
+                        Pseudo du joueur
+                        <input type="text" id="editUsername" class="input-field" placeholder="Pseudo exact du joueur">
+                    </label>
+                    <label>
+                        Mot cible
+                        <input type="text" id="editTargetWord" class="input-field">
+                    </label>
+                    <label>
+                        Nombre d'essais
+                        <input type="number" id="editAttemptsCount" class="input-field" min="1" max="6">
+                    </label>
+                    <label>
+                        Résultat
+                        <select id="editIsWinner" class="input-field">
+                            <option value="true">Victoire</option>
+                            <option value="false">Défaite</option>
+                        </select>
+                    </label>
+                    <label>
+                        Date de la partie
+                        <input type="datetime-local" id="editPlayedAt" class="input-field">
+                    </label>
+                </div>
+                <div id="adminEditError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="adminSaveBtn" class="btn btn-primary">Enregistrer</button>
+                    <button id="adminEditCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal édition compte admin -->
+        <div id="adminUserModal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="adminUserModalTitle">Modifier le compte</h2>
+                <input type="hidden" id="editUserId">
+                <div class="admin-edit-grid admin-edit-grid-single">
+                    <label>
+                        Pseudo
+                        <input type="text" id="editUserUsername" class="input-field" placeholder="Ex : MonPseudo">
+                    </label>
+                    <label>
+                        Adresse e-mail
+                        <input type="email" id="editUserEmail" class="input-field" placeholder="joueur@exemple.com" autocomplete="email">
+                    </label>
+                    <label id="editUserPasswordLabel">
+                        <span id="editUserPasswordLabelText">Mot de passe</span>
+                        <input type="password" id="editUserPassword" class="input-field" autocomplete="new-password">
+                    </label>
+                    <label>
+                        <span id="editUserPasswordConfirmLabel">Confirmer le mot de passe</span>
+                        <input type="password" id="editUserPasswordConfirm" class="input-field" autocomplete="new-password">
+                    </label>
+                </div>
+                <p id="editUserPasswordHint" class="password-hint hidden">Laisser vide pour conserver le mot de passe actuel</p>
+                <p class="password-hint">8 caractères minimum, avec majuscule, minuscule et chiffre</p>
+                <div id="adminUserError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="adminUserSaveBtn" class="btn btn-primary">Enregistrer</button>
+                    <button id="adminUserCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal édition mot admin -->
+        <div id="adminWordModal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="adminWordModalTitle">Modifier le mot</h2>
+                <input type="hidden" id="editWordId">
+                <div class="admin-edit-grid admin-edit-grid-single">
+                    <label>
+                        Mot (4 à 15 lettres A-Z)
+                        <input type="text" id="editWordValue" class="input-field" placeholder="Ex : MAISON">
+                    </label>
+                    <label>
+                        Difficulté
+                        <select id="editWordDifficulty" class="input-field">
+                            <option value="">Auto (selon longueur)</option>
+                            <option value="EASY">Facile</option>
+                            <option value="MEDIUM">Moyen</option>
+                            <option value="HARD">Difficile</option>
+                        </select>
+                    </label>
+                    <label>
+                        Langue
+                        <select id="editWordLanguage" class="input-field">
+                            <option value="FR" selected>FR</option>
+                            <option value="EN">EN</option>
+                        </select>
+                    </label>
+                </div>
+                <div id="adminWordError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="adminWordSaveBtn" class="btn btn-primary">Enregistrer</button>
+                    <button id="adminWordCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal changement e-mail -->
+        <div id="changeEmailModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Modifier l'adresse e-mail</h2>
+                <div class="admin-edit-grid admin-edit-grid-single">
+                    <label>
+                        Nouvelle adresse e-mail
+                        <input type="email" id="newEmailInput" class="input-field" autocomplete="email">
+                    </label>
+                </div>
+                <div id="changeEmailError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="changeEmailSaveBtn" class="btn btn-primary">Enregistrer</button>
+                    <button id="changeEmailCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal changement mot de passe -->
+        <div id="changePasswordModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Modifier le mot de passe</h2>
+                <div class="admin-edit-grid admin-edit-grid-single">
+                    <label>
+                        Ancien mot de passe
+                        <input type="password" id="oldPasswordInput" class="input-field" autocomplete="current-password">
+                    </label>
+                    <label>
+                        Nouveau mot de passe
+                        <input type="password" id="newPasswordInput" class="input-field" autocomplete="new-password">
+                    </label>
+                    <label>
+                        Confirmer le nouveau mot de passe
+                        <input type="password" id="confirmNewPasswordInput" class="input-field" autocomplete="new-password">
+                    </label>
+                </div>
+                <p class="password-hint">8 caractères minimum, avec majuscule, minuscule et chiffre</p>
+                <div id="changePasswordError" class="error-message"></div>
+                <div class="modal-actions">
+                    <button id="changePasswordSaveBtn" class="btn btn-primary">Enregistrer</button>
+                    <button id="changePasswordCancelBtn" class="btn btn-secondary">Annuler</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Jeu (caché par défaut) -->
+        <section id="gameSection" class="section game-section hidden">
+            <div class="game-header">
+                <div class="header-buttons">
+                    <div class="new-game-dropdown-wrapper">
+                        <button id="newGameBtn" class="btn btn-secondary btn-with-icon" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="newGameDropdown">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            <span>Nouvelle Partie</span>
+                        </button>
+                        <div id="newGameDropdown" class="new-game-dropdown hidden" role="menu" aria-label="Choisir la difficulté">
+                            <button type="button" class="new-game-dropdown-item" data-difficulty="EASY" role="menuitem">Facile (1 point)</button>
+                            <button type="button" class="new-game-dropdown-item" data-difficulty="MEDIUM" role="menuitem">Moyen (2 points)</button>
+                            <button type="button" class="new-game-dropdown-item" data-difficulty="HARD" role="menuitem">Difficile (3 points)</button>
+                        </div>
+                    </div>
+                    <div class="account-dropdown-wrapper">
+                        <button id="accountMenuBtn" class="btn btn-secondary btn-with-icon" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="accountDropdown">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span id="accountMenuLabel">Mon compte</span>
+                        </button>
+                        <div id="accountDropdown" class="new-game-dropdown hidden" role="menu" aria-label="Menu du compte">
+                            <button type="button" class="new-game-dropdown-item" id="changeEmailMenuBtn" role="menuitem">Modifier l'adresse e-mail</button>
+                            <button type="button" class="new-game-dropdown-item" id="changePasswordMenuBtn" role="menuitem">Modifier le mot de passe</button>
+                            <button type="button" class="new-game-dropdown-item" id="logoutBtn" role="menuitem">Déconnexion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-container">
+                <div id="gameInfo" class="game-info">
+                    <p id="wordLengthInfo" class="word-length-info"></p>
+                    <p>Difficulté : <strong id="gameDifficultyDisplay">-</strong></p>
+                    <p>Essais restants : <span id="attemptsRemaining">6</span> / 6</p>
+                </div>
+
+                <div class="game-play-area">
+                    <div class="guess-input-group">
+                        <div id="guessLetterGrid" class="letter-grid" role="group" aria-label="Saisie du mot"></div>
+                        <button id="submitGuessBtn" class="btn btn-primary">Valider</button>
+                    </div>
+
+                    <div id="attemptsHistory" class="attempts-history">
+                        <h3>Historique des tentatives</h3>
+                        <div id="attemptsList" class="attempts-list"></div>
+                    </div>
+                </div>
+
+                <div id="gameMessage" class="game-message"></div>
+            </div>
+        </section>
+
+        <!-- Section Statistiques -->
+        <section id="statsSection" class="section stats-section hidden">
+            <h2>Statistiques</h2>
+            <div class="stats-container">
+                <div class="stats-box">
+                    <h3>Mes Statistiques</h3>
+                    <p>Score total: <strong id="totalScore">0</strong></p>
+                    <p>Total de parties: <strong id="totalGames">0</strong></p>
+                    <p>Victoires: <strong id="totalWins">0</strong></p>
+                    <p>Taux de victoire: <strong id="winRate">0%</strong></p>
+                    <p>Moyenne d'essais: <strong id="avgAttempts">0</strong></p>
+                </div>
+                <div class="stats-box">
+                    <h3>🏆 Classement Global</h3>
+                    <table id="leaderboard" class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Pseudo</th>
+                                <th>Score</th>
+                                <th>Victoires</th>
+                                <th>Taux</th>
+                                <th>Moy. essais</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

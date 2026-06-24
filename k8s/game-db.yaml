@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: game-db-pvc
+  namespace: motus
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-db
+  namespace: motus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-db
+  template:
+    metadata:
+      labels:
+        app: game-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: motus_game
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: motus-db-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "motus", "-d", "motus_game"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: game-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-db
+  namespace: motus
+spec:
+  selector:
+    app: game-db
+  ports:
+    - port: 5432
+      targetPort: 5432

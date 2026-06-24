@@ -1,0 +1,846 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.73kB done
+#1 DONE 0.0s
+
+#2 [player-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 394B done
+#2 DONE 0.0s
+
+#3 [game-service internal] load build definition from Dockerfile
+#3 transferring dockerfile: 394B done
+#3 DONE 0.0s
+
+#4 [player-service internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-25
+#4 ...
+
+#5 [score-service internal] load build definition from Dockerfile
+#5 transferring dockerfile: 394B done
+#5 DONE 0.0s
+
+#4 [score-service internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-25
+#4 DONE 0.3s
+
+#6 [score-service internal] load metadata for docker.io/library/eclipse-temurin:25-jre-jammy
+#6 DONE 0.3s
+
+#7 [player-service internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [score-service internal] load .dockerignore
+#8 transferring context: 2B done
+#8 DONE 0.0s
+
+#9 [game-service internal] load .dockerignore
+#9 transferring context: 2B done
+#9 DONE 0.0s
+
+#10 [game-service builder 1/5] FROM docker.io/library/maven:3.9-eclipse-temurin-25@sha256:01ef98a139ed64622c086bac54d1e167453d0f2ff68b69d00978f26d8736215c
+#10 DONE 0.0s
+
+#11 [game-service stage-1 1/4] FROM docker.io/library/eclipse-temurin:25-jre-jammy@sha256:c3e62cd0cece58d8de8d760ab95a5014f3b5a6ea32178f54270edb5b4aab9d1f
+#11 CACHED
+
+#12 [player-service internal] load build context
+#12 transferring context: 1.54kB done
+#12 DONE 0.0s
+
+#13 [game-service internal] load build context
+#13 transferring context: 3.38kB done
+#13 DONE 0.0s
+
+#14 [score-service internal] load build context
+#14 transferring context: 1.63kB done
+#14 DONE 0.0s
+
+#15 [player-service builder 4/5] COPY src ./src
+#15 CACHED
+
+#16 [player-service builder 3/5] COPY pom.xml .
+#16 CACHED
+
+#17 [player-service builder 5/5] RUN mvn -q clean package -DskipTests
+#17 CACHED
+
+#18 [score-service builder 4/5] COPY src ./src
+#18 CACHED
+
+#19 [score-service builder 3/5] COPY pom.xml .
+#19 CACHED
+
+#20 [score-service builder 5/5] RUN mvn -q clean package -DskipTests
+#20 CACHED
+
+#21 [score-service builder 2/5] WORKDIR /app
+#21 CACHED
+
+#22 [game-service builder 4/5] COPY src ./src
+#22 CACHED
+
+#23 [game-service builder 3/5] COPY pom.xml .
+#23 CACHED
+
+#24 [game-service builder 5/5] RUN mvn -q clean package -DskipTests
+#24 CACHED
+
+#25 [game-service stage-1 2/4] RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+#25 0.361 Get:1 http://ports.ubuntu.com/ubuntu-ports jammy InRelease [270 kB]
+#25 0.494 Get:2 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [128 kB]
+#25 0.613 Get:3 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease [127 kB]
+#25 0.883 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [129 kB]
+#25 0.983 Get:5 http://ports.ubuntu.com/ubuntu-ports jammy/restricted arm64 Packages [24.2 kB]
+#25 1.024 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 Packages [17.2 MB]
+#25 2.500 Get:7 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 Packages [1,758 kB]
+#25 2.652 Get:8 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 Packages [224 kB]
+#25 2.714 Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 Packages [7,453 kB]
+#25 3.213 Get:10 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [4,156 kB]
+#25 3.525 Get:11 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 Packages [63.5 kB]
+#25 3.580 Get:12 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [1,670 kB]
+#25 3.699 Get:13 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 Packages [82.4 kB]
+#25 3.751 Get:14 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 Packages [33.7 kB]
+#25 3.787 Get:15 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 Packages [7,173 kB]
+#25 4.235 Get:16 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 Packages [56.7 kB]
+#25 4.277 Get:17 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [3,829 kB]
+#25 4.552 Get:18 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [1,370 kB]
+#25 4.698 Fetched 45.8 MB in 5s (10.0 MB/s)
+#25 4.698 Reading package lists...
+#25 5.385 Reading package lists...
+#25 6.052 Building dependency tree...
+#25 6.234 Reading state information...
+#25 6.379 The following additional packages will be installed:
+#25 6.379   libcurl4 libldap-2.5-0 libldap-common libnghttp2-14 libpsl5 librtmp1
+#25 6.379   libsasl2-2 libsasl2-modules libsasl2-modules-db libssh-4 publicsuffix
+#25 6.380 Suggested packages:
+#25 6.380   libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+#25 6.380   libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql
+#25 6.402 The following NEW packages will be installed:
+#25 6.403   curl libcurl4 libldap-2.5-0 libldap-common libnghttp2-14 libpsl5 librtmp1
+#25 6.403   libsasl2-2 libsasl2-modules libsasl2-modules-db libssh-4 publicsuffix
+#25 6.463 0 upgraded, 12 newly installed, 0 to remove and 3 not upgraded.
+#25 6.463 Need to get 1,327 kB of archives.
+#25 6.463 After this operation, 3,683 kB of additional disk space will be used.
+#25 6.463 Get:1 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libnghttp2-14 arm64 1.43.0-1ubuntu0.3 [76.0 kB]
+#25 6.524 Get:2 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 libpsl5 arm64 0.21.0-1.2build2 [58.3 kB]
+#25 6.651 Get:3 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 publicsuffix all 20211207.1025-1 [129 kB]
+#25 6.713 Get:4 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libsasl2-modules-db arm64 2.1.27+dfsg2-3ubuntu1.2 [21.1 kB]
+#25 6.759 Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libsasl2-2 arm64 2.1.27+dfsg2-3ubuntu1.2 [55.6 kB]
+#25 6.808 Get:6 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libldap-2.5-0 arm64 2.5.20+dfsg-0ubuntu0.22.04.1 [182 kB]
+#25 6.888 Get:7 http://ports.ubuntu.com/ubuntu-ports jammy/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2build4 [59.2 kB]
+#25 6.941 Get:8 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libssh-4 arm64 0.9.6-2ubuntu0.22.04.7 [186 kB]
+#25 6.996 Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libcurl4 arm64 7.81.0-1ubuntu1.24 [285 kB]
+#25 7.070 Get:10 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 curl arm64 7.81.0-1ubuntu1.24 [190 kB]
+#25 7.232 Get:11 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libldap-common all 2.5.20+dfsg-0ubuntu0.22.04.1 [16.4 kB]
+#25 7.283 Get:12 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 libsasl2-modules arm64 2.1.27+dfsg2-3ubuntu1.2 [68.4 kB]
+#25 7.370 debconf: delaying package configuration, since apt-utils is not installed
+#25 7.382 Fetched 1,327 kB in 1s (1,513 kB/s)
+#25 7.390 Selecting previously unselected package libnghttp2-14:arm64.
+#25 7.390 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7616 files and directories currently installed.)
+#25 7.394 Preparing to unpack .../00-libnghttp2-14_1.43.0-1ubuntu0.3_arm64.deb ...
+#25 7.395 Unpacking libnghttp2-14:arm64 (1.43.0-1ubuntu0.3) ...
+#25 7.407 Selecting previously unselected package libpsl5:arm64.
+#25 7.408 Preparing to unpack .../01-libpsl5_0.21.0-1.2build2_arm64.deb ...
+#25 7.409 Unpacking libpsl5:arm64 (0.21.0-1.2build2) ...
+#25 7.416 Selecting previously unselected package publicsuffix.
+#25 7.416 Preparing to unpack .../02-publicsuffix_20211207.1025-1_all.deb ...
+#25 7.418 Unpacking publicsuffix (20211207.1025-1) ...
+#25 7.425 Selecting previously unselected package libsasl2-modules-db:arm64.
+#25 7.426 Preparing to unpack .../03-libsasl2-modules-db_2.1.27+dfsg2-3ubuntu1.2_arm64.deb ...
+#25 7.427 Unpacking libsasl2-modules-db:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.435 Selecting previously unselected package libsasl2-2:arm64.
+#25 7.436 Preparing to unpack .../04-libsasl2-2_2.1.27+dfsg2-3ubuntu1.2_arm64.deb ...
+#25 7.437 Unpacking libsasl2-2:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.445 Selecting previously unselected package libldap-2.5-0:arm64.
+#25 7.446 Preparing to unpack .../05-libldap-2.5-0_2.5.20+dfsg-0ubuntu0.22.04.1_arm64.deb ...
+#25 7.447 Unpacking libldap-2.5-0:arm64 (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+#25 7.457 Selecting previously unselected package librtmp1:arm64.
+#25 7.457 Preparing to unpack .../06-librtmp1_2.4+20151223.gitfa8646d.1-2build4_arm64.deb ...
+#25 7.459 Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build4) ...
+#25 7.467 Selecting previously unselected package libssh-4:arm64.
+#25 7.468 Preparing to unpack .../07-libssh-4_0.9.6-2ubuntu0.22.04.7_arm64.deb ...
+#25 7.469 Unpacking libssh-4:arm64 (0.9.6-2ubuntu0.22.04.7) ...
+#25 7.478 Selecting previously unselected package libcurl4:arm64.
+#25 7.479 Preparing to unpack .../08-libcurl4_7.81.0-1ubuntu1.24_arm64.deb ...
+#25 7.480 Unpacking libcurl4:arm64 (7.81.0-1ubuntu1.24) ...
+#25 7.488 Selecting previously unselected package curl.
+#25 7.489 Preparing to unpack .../09-curl_7.81.0-1ubuntu1.24_arm64.deb ...
+#25 7.490 Unpacking curl (7.81.0-1ubuntu1.24) ...
+#25 7.499 Selecting previously unselected package libldap-common.
+#25 7.500 Preparing to unpack .../10-libldap-common_2.5.20+dfsg-0ubuntu0.22.04.1_all.deb ...
+#25 7.501 Unpacking libldap-common (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+#25 7.510 Selecting previously unselected package libsasl2-modules:arm64.
+#25 7.511 Preparing to unpack .../11-libsasl2-modules_2.1.27+dfsg2-3ubuntu1.2_arm64.deb ...
+#25 7.512 Unpacking libsasl2-modules:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.524 Setting up libpsl5:arm64 (0.21.0-1.2build2) ...
+#25 7.527 Setting up libsasl2-modules:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.532 Setting up libnghttp2-14:arm64 (1.43.0-1ubuntu0.3) ...
+#25 7.535 Setting up libldap-common (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+#25 7.538 Setting up libsasl2-modules-db:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.542 Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build4) ...
+#25 7.544 Setting up libsasl2-2:arm64 (2.1.27+dfsg2-3ubuntu1.2) ...
+#25 7.547 Setting up libssh-4:arm64 (0.9.6-2ubuntu0.22.04.7) ...
+#25 7.550 Setting up publicsuffix (20211207.1025-1) ...
+#25 7.553 Setting up libldap-2.5-0:arm64 (2.5.20+dfsg-0ubuntu0.22.04.1) ...
+#25 7.556 Setting up libcurl4:arm64 (7.81.0-1ubuntu1.24) ...
+#25 7.558 Setting up curl (7.81.0-1ubuntu1.24) ...
+#25 7.561 Processing triggers for libc-bin (2.35-0ubuntu3.13) ...
+#25 DONE 7.6s
+
+#26 [score-service stage-1 3/4] WORKDIR /app
+#26 DONE 0.0s
+
+#27 [game-service stage-1 4/4] COPY --from=builder /app/target/*.jar app.jar
+#27 DONE 0.1s
+
+#28 [player-service stage-1 4/4] COPY --from=builder /app/target/*.jar app.jar
+#28 DONE 0.1s
+
+#29 [score-service stage-1 4/4] COPY --from=builder /app/target/*.jar app.jar
+#29 DONE 0.1s
+
+#30 [player-service] exporting to image
+#30 exporting layers 0.1s done
+#30 writing image sha256:d0f260fa17566861ea4557c076b96a175059a3668f57a7f1dcbf1a0b66ac86e8
+#30 writing image sha256:d0f260fa17566861ea4557c076b96a175059a3668f57a7f1dcbf1a0b66ac86e8 done
+#30 naming to docker.io/library/projet-player-service done
+#30 DONE 0.1s
+
+#31 [score-service] exporting to image
+#31 exporting layers 0.1s done
+#31 writing image sha256:a95db6f03aab18b58f282a1c352adcbcbcff72a6f99b5325ceaeb0c6af33adcf done
+#31 naming to docker.io/library/projet-score-service done
+#31 DONE 0.1s
+
+#32 [game-service] exporting to image
+#32 exporting layers 0.1s done
+#32 writing image sha256:6f8b577feda4dc78bef1ac3a4708d6460855fc1b5a8170ab96b37649368cc564 done
+#32 naming to docker.io/library/projet-game-service done
+#32 DONE 0.1s
+
+#33 [score-service] resolving provenance for metadata file
+#33 DONE 0.0s
+
+#34 [player-service] resolving provenance for metadata file
+#34 DONE 0.0s
+
+#35 [game-service] resolving provenance for metadata file
+#35 DONE 0.0s
+ projet-score-service  Built
+ projet-game-service  Built
+ projet-player-service  Built
+ Network projet_motus-network  Creating
+ Network projet_motus-network  Created
+ Container player-service  Creating
+ Container player-service  Created
+ Container score-service  Creating
+ Container game-service  Creating
+ Container game-service  Created
+ Container score-service  Created
+Attaching to game-service, player-service, score-service
+player-service  | 
+player-service  |   .   ____          _            __ _ _
+player-service  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+player-service  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+player-service  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+player-service  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+player-service  |  =========|_|==============|___/=/_/_/_/
+player-service  | 
+player-service  |  :: Spring Boot ::                (v4.0.6)
+player-service  | 
+player-service  | 2026-06-05T09:57:41.578Z  INFO 1 --- [           main] d.p.p.PlayerServiceApplication           : Starting PlayerServiceApplication v0.0.1-SNAPSHOT using Java 25.0.3 with PID 1 (/app/app.jar started by root in /app)
+player-service  | 2026-06-05T09:57:41.580Z  INFO 1 --- [           main] d.p.p.PlayerServiceApplication           : No active profile set, falling back to 1 default profile: "default"
+player-service  | 2026-06-05T09:57:42.090Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+player-service  | 2026-06-05T09:57:42.117Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interface.
+player-service  | 2026-06-05T09:57:42.455Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8082 (http)
+player-service  | 2026-06-05T09:57:42.462Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+player-service  | 2026-06-05T09:57:42.462Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+player-service  | 2026-06-05T09:57:42.474Z  INFO 1 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 866 ms
+player-service  | 2026-06-05T09:57:42.652Z  INFO 1 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+player-service  | 2026-06-05T09:57:42.686Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+player-service  | 2026-06-05T09:57:42.942Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+player-service  | 2026-06-05T09:57:42.957Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+player-service  | 2026-06-05T09:57:43.047Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:player_db user=SA
+player-service  | 2026-06-05T09:57:43.048Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+player-service  | 2026-06-05T09:57:43.077Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+player-service  | 	Database JDBC URL [jdbc:h2:mem:player_db]
+player-service  | 	Database driver: H2 JDBC Driver
+player-service  | 	Database dialect: H2Dialect
+player-service  | 	Database version: 2.4.240
+player-service  | 	Default catalog/schema: PLAYER_DB/PUBLIC
+player-service  | 	Autocommit mode: undefined/unknown
+player-service  | 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+player-service  | 	JDBC fetch size: 100
+player-service  | 	Pool: DataSourceConnectionProvider
+player-service  | 	Minimum pool size: undefined/unknown
+player-service  | 	Maximum pool size: undefined/unknown
+player-service  | 2026-06-05T09:57:43.438Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+player-service  | Hibernate: 
+player-service  |     create table players (
+player-service  |         id bigint generated by default as identity,
+player-service  |         email varchar(255) not null,
+player-service  |         registration_date timestamp(6),
+player-service  |         username varchar(255) not null,
+player-service  |         primary key (id)
+player-service  |     )
+player-service  | Hibernate: 
+player-service  |     alter table if exists players 
+player-service  |        drop constraint if exists UKpnrwm9bkjel7qss1ekm05j953
+player-service  | Hibernate: 
+player-service  |     alter table if exists players 
+player-service  |        add constraint UKpnrwm9bkjel7qss1ekm05j953 unique (email)
+player-service  | Hibernate: 
+player-service  |     alter table if exists players 
+player-service  |        drop constraint if exists UKp1chj5w2v1nune5xmmd94u1yj
+player-service  | Hibernate: 
+player-service  |     alter table if exists players 
+player-service  |        add constraint UKp1chj5w2v1nune5xmmd94u1yj unique (username)
+player-service  | 2026-06-05T09:57:43.478Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+player-service  | 2026-06-05T09:57:43.532Z  INFO 1 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+player-service  | 2026-06-05T09:57:43.682Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+player-service  | 2026-06-05T09:57:44.127Z  INFO 1 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+player-service  | 2026-06-05T09:57:44.193Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8082 (http) with context path '/'
+player-service  | 2026-06-05T09:57:44.201Z  INFO 1 --- [           main] d.p.p.PlayerServiceApplication           : Started PlayerServiceApplication in 2.872 seconds (process running for 3.164)
+player-service  | 2026-06-05T09:57:46.105Z  INFO 1 --- [nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+player-service  | 2026-06-05T09:57:46.106Z  INFO 1 --- [nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+player-service  | 2026-06-05T09:57:46.107Z  INFO 1 --- [nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+score-service   | 
+score-service   |   .   ____          _            __ _ _
+score-service   |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+score-service   | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+score-service   |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+score-service   |   '  |____| .__|_| |_|_| |_\__, | / / / /
+score-service   |  =========|_|==============|___/=/_/_/_/
+score-service   | 
+score-service   |  :: Spring Boot ::                (v4.0.6)
+score-service   | 
+score-service   | 2026-06-05T09:57:48.235Z  INFO 1 --- [           main] d.p.s.ScoreServiceApplication            : Starting ScoreServiceApplication v0.0.1-SNAPSHOT using Java 25.0.3 with PID 1 (/app/app.jar started by root in /app)
+score-service   | 2026-06-05T09:57:48.240Z  INFO 1 --- [           main] d.p.s.ScoreServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+game-service    | 
+game-service    |   .   ____          _            __ _ _
+game-service    |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+game-service    | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+game-service    |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+game-service    |   '  |____| .__|_| |_|_| |_\__, | / / / /
+game-service    |  =========|_|==============|___/=/_/_/_/
+game-service    | 
+game-service    |  :: Spring Boot ::                (v4.0.6)
+game-service    | 
+game-service    | 2026-06-05T09:57:49.037Z  INFO 1 --- [           main] d.p.gameserver.GameServiceApplication    : Starting GameServiceApplication v0.0.1-SNAPSHOT using Java 25.0.3 with PID 1 (/app/app.jar started by root in /app)
+game-service    | 2026-06-05T09:57:49.043Z  INFO 1 --- [           main] d.p.gameserver.GameServiceApplication    : No active profile set, falling back to 1 default profile: "default"
+score-service   | 2026-06-05T09:57:49.654Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+score-service   | 2026-06-05T09:57:49.757Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 93 ms. Found 1 JPA repository interface.
+game-service    | 2026-06-05T09:57:50.713Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+score-service   | 2026-06-05T09:57:50.786Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+score-service   | 2026-06-05T09:57:50.799Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+score-service   | 2026-06-05T09:57:50.799Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+game-service    | 2026-06-05T09:57:50.801Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 4 JPA repository interfaces.
+score-service   | 2026-06-05T09:57:50.821Z  INFO 1 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2500 ms
+game-service    | 2026-06-05T09:57:51.236Z  INFO 1 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=8bab1539-aa8a-34b3-b875-9490efa5c243
+score-service   | 2026-06-05T09:57:51.331Z  INFO 1 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+score-service   | 2026-06-05T09:57:51.438Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+game-service    | 2026-06-05T09:57:52.215Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+game-service    | 2026-06-05T09:57:52.227Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+game-service    | 2026-06-05T09:57:52.228Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+game-service    | 2026-06-05T09:57:52.245Z  INFO 1 --- [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3138 ms
+score-service   | 2026-06-05T09:57:52.492Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+score-service   | 2026-06-05T09:57:52.563Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+game-service    | 2026-06-05T09:57:52.662Z  INFO 1 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+game-service    | 2026-06-05T09:57:52.741Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+score-service   | 2026-06-05T09:57:52.839Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:score_db user=SA
+score-service   | 2026-06-05T09:57:52.844Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+score-service   | 2026-06-05T09:57:52.940Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+score-service   | 	Database JDBC URL [jdbc:h2:mem:score_db]
+score-service   | 	Database driver: H2 JDBC Driver
+score-service   | 	Database dialect: H2Dialect
+score-service   | 	Database version: 2.4.240
+score-service   | 	Default catalog/schema: SCORE_DB/PUBLIC
+score-service   | 	Autocommit mode: undefined/unknown
+score-service   | 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+score-service   | 	JDBC fetch size: 100
+score-service   | 	Pool: DataSourceConnectionProvider
+score-service   | 	Minimum pool size: undefined/unknown
+score-service   | 	Maximum pool size: undefined/unknown
+game-service    | 2026-06-05T09:57:53.466Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+game-service    | 2026-06-05T09:57:53.516Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+game-service    | 2026-06-05T09:57:53.739Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:games user=SA
+game-service    | 2026-06-05T09:57:53.741Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+game-service    | 2026-06-05T09:57:53.806Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+game-service    | 	Database JDBC URL [jdbc:h2:mem:games]
+game-service    | 	Database driver: H2 JDBC Driver
+game-service    | 	Database dialect: H2Dialect
+game-service    | 	Database version: 2.4.240
+game-service    | 	Default catalog/schema: GAMES/PUBLIC
+game-service    | 	Autocommit mode: undefined/unknown
+game-service    | 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+game-service    | 	JDBC fetch size: 100
+game-service    | 	Pool: DataSourceConnectionProvider
+game-service    | 	Minimum pool size: undefined/unknown
+game-service    | 	Maximum pool size: undefined/unknown
+score-service   | 2026-06-05T09:57:54.069Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+score-service   | Hibernate: 
+score-service   |     create table game_results (
+score-service   |         id bigint generated by default as identity,
+score-service   |         attempts_count integer,
+score-service   |         game_id bigint,
+score-service   |         is_winner boolean,
+score-service   |         played_at timestamp(6),
+score-service   |         player_id bigint,
+score-service   |         target_word varchar(255),
+score-service   |         primary key (id)
+score-service   |     )
+score-service   | 2026-06-05T09:57:54.129Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+score-service   | 2026-06-05T09:57:54.216Z  INFO 1 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+game-service    | 2026-06-05T09:57:54.911Z  INFO 1 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+game-service    | Hibernate: 
+game-service    |     create table games (
+game-service    |         id bigint generated by default as identity,
+game-service    |         attempts_remaining integer,
+game-service    |         end_at timestamp(6),
+game-service    |         max_attempts integer,
+game-service    |         player_id varchar(255),
+game-service    |         start_at timestamp(6),
+game-service    |         status enum ('IN_PROGRESS','LOST','WON'),
+game-service    |         word_id bigint,
+game-service    |         primary key (id)
+game-service    |     )
+game-service    | Hibernate: 
+game-service    |     create table guesses (
+game-service    |         id bigint generated by default as identity,
+game-service    |         attempt_number integer,
+game-service    |         created_at timestamp(6),
+game-service    |         guess_word varchar(255),
+game-service    |         game_id bigint,
+game-service    |         primary key (id)
+game-service    |     )
+game-service    | Hibernate: 
+game-service    |     create table letter_feedback (
+game-service    |         id bigint generated by default as identity,
+game-service    |         letter varchar(255),
+game-service    |         position integer,
+game-service    |         status enum ('ABSENT','CORRECT','MISPLACED'),
+game-service    |         guess_id bigint,
+game-service    |         primary key (id)
+game-service    |     )
+game-service    | Hibernate: 
+game-service    |     create table words (
+game-service    |         id bigint generated by default as identity,
+game-service    |         difficulty varchar(255),
+game-service    |         language varchar(255),
+game-service    |         value varchar(255) not null,
+game-service    |         primary key (id)
+game-service    |     )
+game-service    | 2026-06-05T09:57:55.008Z  WARN 1 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+game-service    |     create table words (
+game-service    |         id bigint generated by default as identity,
+game-service    |         difficulty varchar(255),
+game-service    |         language varchar(255),
+game-service    |         value varchar(255) not null,
+game-service    |         primary key (id)
+game-service    |     )" via JDBC [Syntax error in SQL statement "\000a    create table words (\000a        id bigint generated by default as identity,\000a        difficulty varchar(255),\000a        language varchar(255),\000a        [*]value varchar(255) not null,\000a        primary key (id)\000a    )"; expected "identifier";]
+game-service    | 
+game-service    | org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+game-service    |     create table words (
+game-service    |         id bigint generated by default as identity,
+game-service    |         difficulty varchar(255),
+game-service    |         language varchar(255),
+game-service    |         value varchar(255) not null,
+game-service    |         primary key (id)
+game-service    |     )" via JDBC [Syntax error in SQL statement "\000a    create table words (\000a        id bigint generated by default as identity,\000a        difficulty varchar(255),\000a        language varchar(255),\000a        [*]value varchar(255) not null,\000a        primary key (id)\000a    )"; expected "identifier";]
+game-service    | 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:81) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:566) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:506) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.createTable(AbstractSchemaMigrator.java:305) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:80) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:220) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:96) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:269) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$1(SchemaManagementToolCoordinator.java:101) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at java.base/java.util.HashMap.forEach(Unknown Source) ~[na:na]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:100) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:323) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryRegistry.instantiateSessionFactory(SessionFactoryRegistry.java:64) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:437) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1456) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at dauphine.projetmicroservices.gameserver.GameServiceApplication.main(GameServiceApplication.java:12) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+game-service    | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+game-service    | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    create table words (\000a        id bigint generated by default as identity,\000a        difficulty varchar(255),\000a        language varchar(255),\000a        [*]value varchar(255) not null,\000a        primary key (id)\000a    )"; expected "identifier"; SQL statement:
+game-service    | 
+game-service    |     create table words (
+game-service    |         id bigint generated by default as identity,
+game-service    |         difficulty varchar(255),
+game-service    |         language varchar(255),
+game-service    |         value varchar(255) not null,
+game-service    |         primary key (id)
+game-service    |     ) [42001-240]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.getSyntaxError(DbException.java:261) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readIdentifier(Parser.java:5568) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8978) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseCreateTable(Parser.java:8926) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseCreate(Parser.java:6483) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parsePrepared(Parser.java:648) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parse(Parser.java:584) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parse(Parser.java:559) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.prepareCommand(Parser.java:487) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:76) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	... 43 common frames omitted
+game-service    | 
+game-service    | Hibernate: 
+game-service    |     alter table if exists words 
+game-service    |        drop constraint if exists UKg7aks0dsbtanv214v8nxa6tfj
+game-service    | Hibernate: 
+game-service    |     alter table if exists words 
+game-service    |        add constraint UKg7aks0dsbtanv214v8nxa6tfj unique (value)
+game-service    | Hibernate: 
+game-service    |     alter table if exists games 
+game-service    |        add constraint FKlngshsulhd5dxq35avu78cw2b 
+game-service    |        foreign key (word_id) 
+game-service    |        references words
+game-service    | 2026-06-05T09:57:55.015Z  WARN 1 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+game-service    |     alter table if exists games 
+game-service    |        add constraint FKlngshsulhd5dxq35avu78cw2b 
+game-service    |        foreign key (word_id) 
+game-service    |        references words" via JDBC [Table "WORDS" not found;]
+game-service    | 
+game-service    | org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+game-service    |     alter table if exists games 
+game-service    |        add constraint FKlngshsulhd5dxq35avu78cw2b 
+game-service    |        foreign key (word_id) 
+game-service    |        references words" via JDBC [Table "WORDS" not found;]
+game-service    | 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:81) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:566) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:506) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:438) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:256) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:96) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:269) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$1(SchemaManagementToolCoordinator.java:101) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at java.base/java.util.HashMap.forEach(Unknown Source) ~[na:na]
+game-service    | 	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:100) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:323) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.internal.SessionFactoryRegistry.instantiateSessionFactory(SessionFactoryRegistry.java:64) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:437) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1456) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419) ~[spring-orm-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.6.jar!/:4.0.6]
+game-service    | 	at dauphine.projetmicroservices.gameserver.GameServiceApplication.main(GameServiceApplication.java:12) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+game-service    | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+game-service    | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+game-service    | Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "WORDS" not found; SQL statement:
+game-service    | 
+game-service    |     alter table if exists games 
+game-service    |        add constraint FKlngshsulhd5dxq35avu78cw2b 
+game-service    |        foreign key (word_id) 
+game-service    |        references  [42102-240]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:198) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:74) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.CommandContainer.update(CommandContainer.java:139) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Command.executeUpdate(Command.java:306) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Command.executeUpdate(Command.java:250) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:76) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	... 42 common frames omitted
+game-service    | 
+game-service    | Hibernate: 
+game-service    |     alter table if exists guesses 
+game-service    |        add constraint FK9hr4l08cfor0sr8qm3bnfmn8e 
+game-service    |        foreign key (game_id) 
+game-service    |        references games
+game-service    | Hibernate: 
+game-service    |     alter table if exists letter_feedback 
+game-service    |        add constraint FK67uughpyj7wj5901t0fer5n3u 
+game-service    |        foreign key (guess_id) 
+game-service    |        references guesses
+game-service    | 2026-06-05T09:57:55.029Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+game-service    | 2026-06-05T09:57:55.188Z  INFO 1 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+score-service   | 2026-06-05T09:57:55.294Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+game-service    | 2026-06-05T09:57:55.692Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+score-service   | 2026-06-05T09:57:56.244Z  INFO 1 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+score-service   | 2026-06-05T09:57:56.396Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
+score-service   | 2026-06-05T09:57:56.410Z  INFO 1 --- [           main] d.p.s.ScoreServiceApplication            : Started ScoreServiceApplication in 8.792 seconds (process running for 9.683)
+game-service    | 2026-06-05T09:57:56.862Z  INFO 1 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+game-service    | 2026-06-05T09:57:56.948Z  INFO 1 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+game-service    | 2026-06-05T09:57:56.979Z  INFO 1 --- [           main] d.p.gameserver.GameServiceApplication    : Started GameServiceApplication in 9.138 seconds (process running for 10.26)
+game-service    | 2026-06-05T09:57:57.112Z  INFO 1 --- [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+game-service    | 2026-06-05T09:57:57.112Z  INFO 1 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+game-service    | 2026-06-05T09:57:57.115Z  INFO 1 --- [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+score-service   | 2026-06-05T09:57:57.314Z  INFO 1 --- [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+score-service   | 2026-06-05T09:57:57.314Z  INFO 1 --- [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+score-service   | 2026-06-05T09:57:57.318Z  INFO 1 --- [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+player-service  | Hibernate: 
+player-service  |     insert 
+player-service  |     into
+player-service  |         players
+player-service  |         (email, registration_date, username, id) 
+player-service  |     values
+player-service  |         (?, ?, ?, default)
+score-service   | Hibernate: 
+score-service   |     select
+score-service   |         gr1_0.id,
+score-service   |         gr1_0.attempts_count,
+score-service   |         gr1_0.game_id,
+score-service   |         gr1_0.is_winner,
+score-service   |         gr1_0.played_at,
+score-service   |         gr1_0.player_id,
+score-service   |         gr1_0.target_word 
+score-service   |     from
+score-service   |         game_results gr1_0 
+score-service   |     where
+score-service   |         gr1_0.player_id=?
+score-service   | Hibernate: 
+score-service   |     select
+score-service   |         gr1_0.id,
+score-service   |         gr1_0.attempts_count,
+score-service   |         gr1_0.game_id,
+score-service   |         gr1_0.is_winner,
+score-service   |         gr1_0.played_at,
+score-service   |         gr1_0.player_id,
+score-service   |         gr1_0.target_word 
+score-service   |     from
+score-service   |         game_results gr1_0
+player-service  | Hibernate: 
+player-service  |     select
+player-service  |         p1_0.id,
+player-service  |         p1_0.email,
+player-service  |         p1_0.registration_date,
+player-service  |         p1_0.username 
+player-service  |     from
+player-service  |         players p1_0 
+player-service  |     where
+player-service  |         p1_0.id=?
+game-service    | Hibernate: 
+game-service    |     select
+game-service    |         w1_0.id,
+game-service    |         w1_0.difficulty,
+game-service    |         w1_0.language,
+game-service    |         w1_0.value 
+game-service    |     from
+game-service    |         words w1_0
+game-service    | 2026-06-05T10:01:10.802Z  WARN 1 --- [nio-8081-exec-7] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 42001, SQLState: 42001
+game-service    | 2026-06-05T10:01:10.803Z  WARN 1 --- [nio-8081-exec-7] org.hibernate.orm.jdbc.error             : Syntax error in SQL statement "select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.[*]value from words w1_0"; expected "identifier"; SQL statement:
+game-service    | select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.value from words w1_0 [42001-240]
+game-service    | 2026-06-05T10:01:10.813Z ERROR 1 --- [nio-8081-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessResourceUsageException: Could not prepare statement [Syntax error in SQL statement "select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.[*]value from words w1_0"; expected "identifier"; SQL statement:
+game-service    | select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.value from words w1_0 [42001-240]] [select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.value from words w1_0]; SQL [select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.value from words w1_0]] with root cause
+game-service    | 
+game-service    | org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.[*]value from words w1_0"; expected "identifier"; SQL statement:
+game-service    | select w1_0.id,w1_0.difficulty,w1_0.language,w1_0.value from words w1_0 [42001-240]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.message.DbException.getSyntaxError(DbException.java:261) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readIdentifier(Parser.java:5568) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readTermObjectDot(Parser.java:4808) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readTermWithIdentifier(Parser.java:5160) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readTerm(Parser.java:4844) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readFactor(Parser.java:3326) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readSum(Parser.java:3313) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readConcat(Parser.java:3278) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readCondition(Parser.java:3068) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.readExpression(Parser.java:2988) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseSelectExpressions(Parser.java:2788) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseSelect(Parser.java:2806) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2695) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQueryTerm(Parser.java:2550) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2529) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2522) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQueryExpression(Parser.java:2515) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parseQuery(Parser.java:2482) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parsePrepared(Parser.java:613) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parse(Parser.java:584) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.parse(Parser.java:559) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.command.Parser.prepareCommand(Parser.java:487) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:686) ~[h2-2.4.240.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:342) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java) ~[HikariCP-7.0.2.jar!/:na]
+game-service    | 	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$4.doPrepare(StatementPreparerImpl.java:155) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:183) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareQueryStatement(StatementPreparerImpl.java:157) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.internal.StandardStatementCreator.createStatement(StandardStatementCreator.java:46) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:257) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:190) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.<init>(JdbcValuesResultSetImpl.java:71) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValues(JdbcSelectExecutorStandardImpl.java:422) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.resolveJdbcValuesSource(JdbcSelectExecutorStandardImpl.java:349) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:143) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:100) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.executeQuery(JdbcSelectExecutor.java:63) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:137) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$1(ConcreteSqmSelectQueryPlan.java:134) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:464) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:392) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.sqm.internal.SqmQueryImpl.doList(SqmQueryImpl.java:374) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:153) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.hibernate.query.Query.getResultList(Query.java:121) ~[hibernate-core-7.2.12.Final.jar!/:7.2.12.Final]
+game-service    | 	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:412) ~[spring-data-jpa-4.0.5.jar!/:4.0.5]
+game-service    | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+game-service    | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+game-service    | 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:166) ~[spring-data-jpa-4.0.5.jar!/:4.0.5]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at jdk.proxy2/jdk.proxy2.$Proxy158.findAll(Unknown Source) ~[na:na]
+game-service    | 	at dauphine.projetmicroservices.gameserver.service.GameService.pickTargetWord(GameService.java:132) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at dauphine.projetmicroservices.gameserver.service.GameService.startNewGame(GameService.java:48) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+game-service    | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+game-service    | 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.7.jar!/:7.0.7]
+game-service    | 	at dauphine.projetmicroservices.gameserver.service.GameService$$SpringCGLIB$$0.startNewGame(<generated>) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at dauphine.projetmicroservices.gameserver.controller.GameController.startGame(GameController.java:25) ~[!/:0.0.1-SNAPSHOT]
+game-service    | 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+game-service    | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+game-service    | 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.7.jar!/:7.0.7]
+game-service    | 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.7.jar!/:7.0.7]
+game-service    | 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1801) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.21.jar!/:na]
+game-service    | 	at java.base/java.lang.Thread.run(Unknown Source) ~[na:na]
+game-service    | 
+game-service    | 2026-06-05T10:02:29.280Z  INFO 1 --- [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+score-service   | 2026-06-05T10:02:29.280Z  INFO 1 --- [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+game-service    | 2026-06-05T10:02:29.283Z  INFO 1 --- [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+score-service   | 2026-06-05T10:02:29.287Z  INFO 1 --- [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+game-service    | 2026-06-05T10:02:29.292Z  INFO 1 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+score-service   | 2026-06-05T10:02:29.294Z  INFO 1 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+game-service    | 2026-06-05T10:02:29.296Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+score-service   | 2026-06-05T10:02:29.297Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+game-service    | 2026-06-05T10:02:29.299Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+score-service   | 2026-06-05T10:02:29.300Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+[Kscore-service exited with code 143
+[Kgame-service exited with code 143
+player-service  | 2026-06-05T10:02:29.534Z  INFO 1 --- [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+player-service  | 2026-06-05T10:02:29.538Z  INFO 1 --- [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+player-service  | 2026-06-05T10:02:29.541Z  INFO 1 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+player-service  | 2026-06-05T10:02:29.543Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+player-service  | 2026-06-05T10:02:29.544Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
