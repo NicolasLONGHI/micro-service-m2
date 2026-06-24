@@ -1,7 +1,0 @@
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/PlayerServiceApplication.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/controller/PlayerController.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/dto/PlayerRegistrationRequest.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/dto/PlayerResponse.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/model/Player.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/repository/PlayerRepository.java
-/Users/nicolaslonghi/Documents/Fac/Micro services/Projet/backend/player-service/src/main/java/dauphine/projetmicroservices/playerservice/service/PlayerService.java

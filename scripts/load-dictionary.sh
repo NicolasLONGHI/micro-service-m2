@@ -2,7 +2,6 @@
 set -e
 
 DICTIONARY_FILE="${DICTIONARY_FILE:-/dictionary/mots_motus.txt}"
-FALLBACK_DICTIONARY="/dictionary/mots_fr.txt"
 CSV_FILE="/tmp/words_import.csv"
 MIN_LENGTH="${MIN_WORD_LENGTH:-6}"
 MAX_LENGTH="${MAX_WORD_LENGTH:-10}"
@@ -40,13 +39,9 @@ if [ "$FORCE_RELOAD" = "1" ] && [ "$EXISTING" -gt 0 ]; then
   psql -h "$PGHOST" -U "$PGUSER" -d "$PGDATABASE" -v ON_ERROR_STOP=1 -c "TRUNCATE TABLE words RESTART IDENTITY CASCADE;"
 fi
 
-if [ ! -f "$DICTIONARY_FILE" ] && [ -f "$FALLBACK_DICTIONARY" ]; then
-  echo "Fichier $DICTIONARY_FILE introuvable, filtrage Motus depuis $FALLBACK_DICTIONARY..."
-  DICTIONARY_FILE="$FALLBACK_DICTIONARY"
-fi
-
 if [ ! -f "$DICTIONARY_FILE" ]; then
   echo "Erreur: fichier dictionnaire introuvable ($DICTIONARY_FILE)"
+  echo "Générez-le avec : ./scripts/build-motus-dictionary.sh"
   exit 1
 fi
 
